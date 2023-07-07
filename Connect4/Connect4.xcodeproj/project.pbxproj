@@ -13,6 +13,7 @@
 		95D316EC2A58C224007C03BC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 95D316EB2A58C224007C03BC /* Preview Assets.xcassets */; };
 		95D316F32A58C36C007C03BC /* Hole.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D316F22A58C36C007C03BC /* Hole.swift */; };
 		95D316F52A58C3E1007C03BC /* Turn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D316F42A58C3E1007C03BC /* Turn.swift */; };
+		95D316F72A58C54E007C03BC /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D316F62A58C54E007C03BC /* Color+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		95D316EB2A58C224007C03BC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		95D316F22A58C36C007C03BC /* Hole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hole.swift; sourceTree = "<group>"; };
 		95D316F42A58C3E1007C03BC /* Turn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Turn.swift; sourceTree = "<group>"; };
+		95D316F62A58C54E007C03BC /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				95D316E62A58C222007C03BC /* ContentView.swift */,
 				95D316F22A58C36C007C03BC /* Hole.swift */,
 				95D316F42A58C3E1007C03BC /* Turn.swift */,
+				95D316F62A58C54E007C03BC /* Color+Extensions.swift */,
 				95D316E82A58C224007C03BC /* Assets.xcassets */,
 				95D316EA2A58C224007C03BC /* Preview Content */,
 			);
@@ -143,6 +146,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95D316F72A58C54E007C03BC /* Color+Extensions.swift in Sources */,
 				95D316E72A58C222007C03BC /* ContentView.swift in Sources */,
 				95D316F32A58C36C007C03BC /* Hole.swift in Sources */,
 				95D316F52A58C3E1007C03BC /* Turn.swift in Sources */,
