@@ -55,7 +55,7 @@ struct ContentView: View {
                             switch hole[index]{
                             case .blank:
                                 Circle()
-                                    .frame(width: geometry.size.width / 9, height: geometry.size.height / 9)
+                                    .frame(width: geometry.size.width / 9, height: geometry.size.width / 9)
                                     .foregroundColor(.black.opacity(0.5))
                                     .onTapGesture {
                                         print("circle \(index) tapped")
@@ -68,10 +68,10 @@ struct ContentView: View {
                                     Circle()
                                         .strokeBorder(Color.white, lineWidth: 4)
                                         .background(Circle().fill(playerColor))
-                                        .frame(width: geometry.size.width / 9, height: geometry.size.height / 9)
+                                        .frame(width: geometry.size.width / 9, height: geometry.size.width / 9)
                                 } else{
                                     Circle()
-                                        .frame(width: geometry.size.width / 9, height: geometry.size.height / 9)
+                                        .frame(width: geometry.size.width / 9, height: geometry.size.width / 9)
                                         .foregroundColor(playerColor)
                                         .onTapGesture {
                                             if(turn == .user && hole[index % 7] == .blank){
@@ -85,11 +85,11 @@ struct ContentView: View {
                                     Circle()
                                         .strokeBorder(Color.white, lineWidth: 4)
                                         .background(Circle().fill(computerColor))
-                                        .frame(width: geometry.size.width / 9, height: geometry.size.height / 9)
+                                        .frame(width: geometry.size.width / 9, height: geometry.size.width / 9)
                                     
                                 }else{
                                     Circle()
-                                        .frame(width: geometry.size.width / 9, height: geometry.size.height / 9)
+                                        .frame(width: geometry.size.width / 9, height: geometry.size.width / 9)
                                         .foregroundColor(computerColor)
                                         .onTapGesture {
                                             if(turn == .user && hole[index % 7] == .blank){
