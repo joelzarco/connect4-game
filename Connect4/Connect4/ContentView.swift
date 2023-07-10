@@ -131,7 +131,67 @@ struct ContentView: View {
                     .cornerRadius(15)
                     .padding(.bottom, 10)
                     
+                    if(turn != .user && turn != .computer){ // no one's turn then start next round
+                        HStack{
+                            Spacer()
+                            Button{
+                                userPieces = 21
+                                computerPieces = 21
+                                hole = Array(repeating: .blank, count: 42)
+                                turn = .user
+                                connectIndex = []
+                            }label: {
+                                Text("Start next round")
+                                    .bold()
+                                    .font(.title)
+                            }
+                            Spacer()
+                        } // inHS
+                        .padding(8)
+                        .background(.blue.opacity(0.7))
+                        .cornerRadius(15)
+                    } // restarting if block
+                    Spacer()
                 } //vs
+                .padding()
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Text("Connect 4")
+                            .bold()
+                            .font(.largeTitle)
+                    }
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        HStack{
+                            Button{
+                                if(turn != .computer){
+                                    userPieces = 21
+                                    computerPieces = 21
+                                    hole = Array(repeating: .blank, count: 42)
+                                    turn = .user
+                                    connectIndex = []
+                                }
+                            }label: {
+                                Image(systemName: "arrow.counterclockwise.circle")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .padding(8)
+                                    .background(.quaternary)
+                                    .cornerRadius(15)
+                            }
+                            NavigationLink{
+                                Text("Settings view")
+                            }label: {
+                                Image(systemName: "gear")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .padding(8)
+                                    .background(.quaternary)
+                                    .cornerRadius(15)
+                            }
+                        } // toolB hs
+                    } // restart
+                } // toolB
             } // nav
             
         } // geo
