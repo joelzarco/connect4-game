@@ -60,7 +60,7 @@ struct ContentView: View {
                                     .onTapGesture {
                                         print("circle \(index) tapped")
                                         if(turn == .user){
-                                            // playerTurn()
+                                             playerTurn(index: index)
                                         }
                                     }
                             case .user:
@@ -75,7 +75,7 @@ struct ContentView: View {
                                         .foregroundColor(playerColor)
                                         .onTapGesture {
                                             if(turn == .user && hole[index % 7] == .blank){
-                                                // playerTurn(index : index)
+                                                 playerTurn(index: index)
                                             }
                                         }
                                 } // else
@@ -93,7 +93,7 @@ struct ContentView: View {
                                         .foregroundColor(computerColor)
                                         .onTapGesture {
                                             if(turn == .user && hole[index % 7] == .blank){
-                                                // playerTurn()
+                                                 playerTurn(index: index)
                                             }
                                         }
                                 }
@@ -195,5 +195,307 @@ struct ContentView: View {
             } // nav
             
         } // geo
-    }
+    } // someV
+    
+    func playerTurn(index: Int) {
+            turn = .computer
+            userPieces -= 1
+            var topIdx = index % 7
+            var blankNum = 0
+            while (hole[topIdx] == .blank && topIdx+7 <= 41 && hole[topIdx+7] == .blank) {
+                blankNum += 1
+                topIdx += 7
+            }
+            var idx = index % 7
+            for i in 0...blankNum {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.12*Double(i)) {
+                    if(idx>6) {
+                        self.hole[idx-7] = .blank
+                    }
+                    self.hole[idx] = .user
+                    idx += 7
+                    if(i == blankNum) {
+                        checkFinish()
+                        if(turn == .computer) {
+                            computerTurn()
+                        }
+                    }
+                }
+            }
+        } // playerTurn()
+///
+    func computerTurn() {
+            computerPieces -= 1
+            // check "|"
+            for row in 0...2 {
+                for col in 0...6 {
+                    if (self.hole[7*row+col] == .blank
+                        && self.hole[7*row+col+7] != .blank
+                        && self.hole[7*row+col+7] == self.hole[7*row+col+14]
+                        && self.hole[7*row+col+14] == self.hole[7*row+col+21]) {
+                        computerDrop(col: col, row: row)
+                        return
+                    }
+                }
+            }
+            // check "\" and drop at left
+            for row in 0...2 {
+                for col in 0...3 {
+                    if (self.hole[7*row+col] == .blank
+                        && self.hole[7*row+col+7] != .blank
+                        && self.hole[7*row+col+8] != .blank
+                        && self.hole[7*row+col+8] == self.hole[7*row+col+16]
+                        && self.hole[7*row+col+16] == self.hole[7*row+col+24]) {
+                        computerDrop(col: col, row: row)
+                        return
+                    }
+                }
+            }
+            // check "\" and drop at right
+            for row in 0...2 {
+                for col in 0...3 {
+                    if (self.hole[7*row+col] != .blank
+                        && self.hole[7*row+col] == self.hole[7*row+col+8]
+                        && self.hole[7*row+col+8] == self.hole[7*row+col+16]
+                        && self.hole[7*row+col+24] == .blank) {
+                        if(7*row+col+31<=41 && self.hole[7*row+col+31] != .blank) {
+                            computerDrop(col: col+24, row: row+3)
+                            return
+                        } else if(7*row+col+31>41) {
+                            computerDrop(col: col+24, row: row+3)
+                            return
+                        }
+                    }
+                }
+            }
+            // check "/" and drop at left
+            for row in 0...2 {
+                for col in 3...6 {
+                    if (self.hole[7*row+col] != .blank
+                        && self.hole[7*row+col] == self.hole[7*row+col+6]
+                        && self.hole[7*row+col+6] == self.hole[7*row+col+12]
+                        && self.hole[7*row+col+18] == .blank) {
+                        if(7*row+col+25<=41 && self.hole[7*row+col+25] != .blank) {
+                            computerDrop(col: col+18, row: row+3)
+                            return
+                        } else if(7*row+col+25>41) {
+                            computerDrop(col: col+18, row: row+3)
+                            return
+                        }
+                    }
+                }
+            }
+            // check "/" and drop at right
+            for row in 0...2 {
+                for col in 3...6 {
+                    if (self.hole[7*row+col] == .blank
+                        && self.hole[7*row+col+6] != .blank
+                        && self.hole[7*row+col+7] != .blank
+                        && self.hole[7*row+col+6] == self.hole[7*row+col+12]
+                        && self.hole[7*row+col+12] == self.hole[7*row+col+18]) {
+                        computerDrop(col: col, row: row)
+                        return
+                    }
+                }
+            }
+            // check "-" and drop at left to win
+            for row in 0...5 {
+                for col in 0...3 {
+                    if (self.hole[7*row+col] == .blank
+                        && self.hole[7*row+col+1] == .computer
+                        && self.hole[7*row+col+1] == self.hole[7*row+col+2]
+                        && self.hole[7*row+col+2] == self.hole[7*row+col+3]) {
+                        if(7*row+col+7<=41 && self.hole[7*row+col+7] != .blank) {
+                            computerDrop(col: col, row: row)
+                            return
+                        } else if(7*row+col+7>41) {
+                            computerDrop(col: col, row: row)
+                            return
+                        }
+                    }
+                }
+            }
+            // check "-" and drop at right to win
+            for row in 0...5 {
+                for col in 3...6 {
+                    if (self.hole[7*row+col] == .blank
+                        && self.hole[7*row+col-1] == .computer
+                        && self.hole[7*row+col-1] == self.hole[7*row+col-2]
+                        && self.hole[7*row+col-2] == self.hole[7*row+col-3]) {
+                        if(7*row+col+7<=41 && self.hole[7*row+col+7] != .blank) {
+                            computerDrop(col: col, row: row)
+                            return
+                        } else if(7*row+col+7>41) {
+                            computerDrop(col: col, row: row)
+                            return
+                        }
+                    }
+                }
+            }
+            // check "-" and drop at left to prevent user win
+            for row in 0...5 {
+                for col in 0...4 {
+                    if (self.hole[7*row+col] == .blank
+                        && self.hole[7*row+col+1] == .user
+                        && self.hole[7*row+col+1] == self.hole[7*row+col+2]) {
+                        if(7*row+col+7<=41 && self.hole[7*row+col+7] != .blank) {
+                            computerDrop(col: col, row: row)
+                            return
+                        } else if(7*row+col+7>41) {
+                            computerDrop(col: col, row: row)
+                            return
+                        }
+                    }
+                }
+            }
+            // check "-" and drop at right to prevent user win
+            for row in 0...5 {
+                for col in 2...6 {
+                    if (self.hole[7*row+col] == .blank
+                        && self.hole[7*row+col-1] == .user
+                        && self.hole[7*row+col-1] == self.hole[7*row+col-2]) {
+                        if(7*row+col+7<=41 && self.hole[7*row+col+7] != .blank) {
+                            computerDrop(col: col, row: row)
+                            return
+                        } else if(7*row+col+7>41) {
+                            computerDrop(col: col, row: row)
+                            return
+                        }
+                    }
+                }
+            }
+            
+            var col = Int.random(in: 0...6)
+            while (self.hole[col] != .blank) {
+                col = Int.random(in: 0...6)
+            }
+            var blankNum = 0
+            while (hole[col] == .blank && col+7 <= 41 && hole[col+7] == .blank) {
+                blankNum += 1
+                col += 7
+            }
+            computerDrop(col: col, row: blankNum)
+        }
+    /// computerTurn()
+    
+    // ->
+    func computerDrop(col: Int, row: Int) {
+            var idx = col % 7
+            for i in 0...row {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.12*Double(i)) {
+                    if(idx>6) {
+                        self.hole[idx-7] = .blank
+                    }
+                    self.hole[idx] = .computer
+                    idx += 7
+                    if(i == row) {
+                        checkFinish()
+                        if(turn == .computer) {
+                            if(computerPieces == 0) {
+                                turn = .tie
+                                tie += 1
+                            } else {
+                                turn = .user
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    // <- ComputerDrop()
+    
+    // -> checkFinish()
+    func checkFinish() {
+            // check "|"
+            for row in 0...2 {
+                for col in 0...6 {
+                    if (self.hole[7*row+col] != .blank
+                        && self.hole[7*row+col] == self.hole[7*row+col+7]
+                        && self.hole[7*row+col+7] == self.hole[7*row+col+14]
+                        && self.hole[7*row+col+14] == self.hole[7*row+col+21]) {
+                        connectIndex.append(7*row+col)
+                        connectIndex.append(7*row+col+7)
+                        connectIndex.append(7*row+col+14)
+                        connectIndex.append(7*row+col+21)
+                        if(self.hole[7*row+col] == .user) {
+                            turn = .userWin
+                            win += 1
+                        } else {
+                            turn = .computerWin
+                            lose += 1
+                        }
+                        return
+                    }
+                }
+            }
+            // check "-"
+            for row in 0...5 {
+                for col in 0...3 {
+                    if (self.hole[7*row+col] != .blank
+                        && self.hole[7*row+col] == self.hole[7*row+col+1]
+                        && self.hole[7*row+col+1] == self.hole[7*row+col+2]
+                        && self.hole[7*row+col+2] == self.hole[7*row+col+3]) {
+                        connectIndex.append(7*row+col)
+                        connectIndex.append(7*row+col+1)
+                        connectIndex.append(7*row+col+2)
+                        connectIndex.append(7*row+col+3)
+                        if(self.hole[7*row+col] == .user) {
+                            turn = .userWin
+                            win += 1
+                        } else {
+                            turn = .computerWin
+                            lose += 1
+                        }
+                        return
+                    }
+                }
+            }
+            // check "\"
+            for row in 0...2 {
+                for col in 0...3 {
+                    if (self.hole[7*row+col] != .blank
+                        && self.hole[7*row+col] == self.hole[7*row+col+8]
+                        && self.hole[7*row+col+8] == self.hole[7*row+col+16]
+                        && self.hole[7*row+col+16] == self.hole[7*row+col+24]) {
+                        connectIndex.append(7*row+col)
+                        connectIndex.append(7*row+col+8)
+                        connectIndex.append(7*row+col+16)
+                        connectIndex.append(7*row+col+24)
+                        if(self.hole[7*row+col] == .user) {
+                            turn = .userWin
+                            win += 1
+                        } else {
+                            turn = .computerWin
+                            lose += 1
+                        }
+                        return
+                    }
+                }
+            }
+            // check "/"
+            for row in 0...2 {
+                for col in 3...6 {
+                    if (self.hole[7*row+col] != .blank
+                        && self.hole[7*row+col] == self.hole[7*row+col+6]
+                        && self.hole[7*row+col+6] == self.hole[7*row+col+12]
+                        && self.hole[7*row+col+12] == self.hole[7*row+col+18]) {
+                        connectIndex.append(7*row+col)
+                        connectIndex.append(7*row+col+6)
+                        connectIndex.append(7*row+col+12)
+                        connectIndex.append(7*row+col+18)
+                        if(self.hole[7*row+col] == .user) {
+                            turn = .userWin
+                            win += 1
+                        } else {
+                            turn = .computerWin
+                            lose += 1
+                        }
+                        return
+                    }
+                }
+            }
+        }
+    // <_
+    
+    
 }
