@@ -14,6 +14,7 @@
 		95D316F32A58C36C007C03BC /* Hole.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D316F22A58C36C007C03BC /* Hole.swift */; };
 		95D316F52A58C3E1007C03BC /* Turn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D316F42A58C3E1007C03BC /* Turn.swift */; };
 		95D316F72A58C54E007C03BC /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D316F62A58C54E007C03BC /* Color+Extensions.swift */; };
+		95D84D6E2A5E030400A364E7 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D84D6D2A5E030400A364E7 /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		95D316F22A58C36C007C03BC /* Hole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hole.swift; sourceTree = "<group>"; };
 		95D316F42A58C3E1007C03BC /* Turn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Turn.swift; sourceTree = "<group>"; };
 		95D316F62A58C54E007C03BC /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
+		95D84D6D2A5E030400A364E7 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 			children = (
 				95D316E42A58C222007C03BC /* Connect4App.swift */,
 				95D316E62A58C222007C03BC /* ContentView.swift */,
+				95D84D6D2A5E030400A364E7 /* SettingsView.swift */,
 				95D316F22A58C36C007C03BC /* Hole.swift */,
 				95D316F42A58C3E1007C03BC /* Turn.swift */,
 				95D316F62A58C54E007C03BC /* Color+Extensions.swift */,
@@ -149,6 +152,7 @@
 				95D316F72A58C54E007C03BC /* Color+Extensions.swift in Sources */,
 				95D316E72A58C222007C03BC /* ContentView.swift in Sources */,
 				95D316F32A58C36C007C03BC /* Hole.swift in Sources */,
+				95D84D6E2A5E030400A364E7 /* SettingsView.swift in Sources */,
 				95D316F52A58C3E1007C03BC /* Turn.swift in Sources */,
 				95D316E52A58C222007C03BC /* Connect4App.swift in Sources */,
 			);

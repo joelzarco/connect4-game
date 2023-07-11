@@ -180,7 +180,7 @@ struct ContentView: View {
                                     .cornerRadius(15)
                             }
                             NavigationLink{
-                                Text("Settings view")
+                                SettingsView()
                             }label: {
                                 Image(systemName: "gear")
                                     .resizable()
