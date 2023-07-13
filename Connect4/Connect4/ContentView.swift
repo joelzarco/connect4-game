@@ -13,8 +13,8 @@ struct ContentView: View {
     @AppStorage("lose") var lose = 0
     @AppStorage("tie") var tie = 0
     
-    @AppStorage("playerColor") var playerColor = Color.pink
-    @AppStorage("computerColor") var computerColor = Color.yellow
+    @AppStorage("playerColor") var playerColor : Color = Color.pink
+    @AppStorage("computerColor") var computerColor : Color = Color.yellow
     
     @State private var userPieces = 21
     @State private var computerPieces = 21
@@ -27,28 +27,8 @@ struct ContentView: View {
         GeometryReader{ geometry in
             NavigationStack{
                 VStack{
-                    HStack{
-                        Circle()
-                            .frame(width: geometry.size.width / 9, height: geometry.size.width / 9)
-                            .foregroundColor(playerColor)
-                        VStack{
-                            HStack{
-                                Text("You")
-                                Spacer()
-                                Text("Computer")
-                            }
-                            .font(.title3.bold())
-                            HStack{
-                                Text("\(userPieces)")
-                                Spacer()
-                                Text("vs")
-                                Text("\(computerPieces)")
-                            } //hs
-                        } // vs
-                        Circle()
-                            .frame(width: geometry.size.width / 9, height: geometry.size.width / 9)
-                            .foregroundColor(computerColor)
-                    } //hs whole upper user vs computer ui block
+                    
+                    HeaderView(playerColor: playerColor, compColor: computerColor, circleWidth: geometry.size.width / 9, userNumber: userPieces, computerNumber: computerPieces)
                     
                     LazyVGrid(columns: Array(repeating: GridItem(), count: 7)) {
                         ForEach(0..<42){ index in
@@ -58,7 +38,7 @@ struct ContentView: View {
                                     .frame(width: geometry.size.width / 9, height: geometry.size.width / 9)
                                     .foregroundColor(.black.opacity(0.5))
                                     .onTapGesture {
-                                        print("circle \(index) tapped")
+//                                        print("circle \(index) tapped")
                                         if(turn == .user){
                                              playerTurn(index: index)
                                         }
@@ -79,14 +59,12 @@ struct ContentView: View {
                                             }
                                         }
                                 } // else
-                                
                             case .computer:
                                 if(connectIndex.contains(index)){
                                     Circle()
                                         .strokeBorder(Color.white, lineWidth: 4)
                                         .background(Circle().fill(computerColor))
                                         .frame(width: geometry.size.width / 9, height: geometry.size.width / 9)
-                                    
                                 }else{
                                     Circle()
                                         .frame(width: geometry.size.width / 9, height: geometry.size.width / 9)
