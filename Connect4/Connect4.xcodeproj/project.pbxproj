@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		950716342A609A4B0036017B /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950716332A609A4B0036017B /* HeaderView.swift */; };
+		950716362A60A5C20036017B /* TurnsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950716352A60A5C20036017B /* TurnsView.swift */; };
 		95AE4B3D2A5F920E003C43CD /* CirclePiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AE4B3C2A5F920E003C43CD /* CirclePiece.swift */; };
 		95D316E52A58C222007C03BC /* Connect4App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D316E42A58C222007C03BC /* Connect4App.swift */; };
 		95D316E72A58C222007C03BC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D316E62A58C222007C03BC /* ContentView.swift */; };
@@ -21,6 +22,7 @@
 
 /* Begin PBXFileReference section */
 		950716332A609A4B0036017B /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		950716352A60A5C20036017B /* TurnsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnsView.swift; sourceTree = "<group>"; };
 		95AE4B3C2A5F920E003C43CD /* CirclePiece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CirclePiece.swift; sourceTree = "<group>"; };
 		95D316E12A58C222007C03BC /* Connect4.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Connect4.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		95D316E42A58C222007C03BC /* Connect4App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connect4App.swift; sourceTree = "<group>"; };
@@ -67,6 +69,7 @@
 				95D316E62A58C222007C03BC /* ContentView.swift */,
 				95D84D6D2A5E030400A364E7 /* SettingsView.swift */,
 				950716332A609A4B0036017B /* HeaderView.swift */,
+				950716352A60A5C20036017B /* TurnsView.swift */,
 				95AE4B3C2A5F920E003C43CD /* CirclePiece.swift */,
 				95D316F22A58C36C007C03BC /* Hole.swift */,
 				95D316F42A58C3E1007C03BC /* Turn.swift */,
@@ -163,6 +166,7 @@
 				95D316F52A58C3E1007C03BC /* Turn.swift in Sources */,
 				95D316E52A58C222007C03BC /* Connect4App.swift in Sources */,
 				950716342A609A4B0036017B /* HeaderView.swift in Sources */,
+				950716362A60A5C20036017B /* TurnsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

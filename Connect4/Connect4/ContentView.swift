@@ -26,9 +26,11 @@ struct ContentView: View {
     var body: some View {
         GeometryReader{ geometry in
             NavigationStack{
+                
                 VStack{
-                    
+                    Spacer()
                     HeaderView(playerColor: playerColor, compColor: computerColor, circleWidth: geometry.size.width / 9, userNumber: userPieces, computerNumber: computerPieces)
+                    Spacer()
                     
                     LazyVGrid(columns: Array(repeating: GridItem(), count: 7)) {
                         ForEach(0..<42){ index in
@@ -83,45 +85,18 @@ struct ContentView: View {
                     .cornerRadius(15)
                     .padding(.bottom, 10)
                     
-                    HStack{// lower turn buttons here
-                        Spacer()
-                        switch turn {
-                        case .user:
-                            Text("Your turn")
-                                .font(.title.bold())
-                        case .computer:
-                            Text("Computer's turn")
-                                .font(.title.bold())
-                        case .userWin:
-                            Text("You won!")
-                                .font(.title.bold())
-                        case .computerWin:
-                            Text("You lost!!!")
-                                .font(.title.bold())
-                        case .tie:
-                            Text("No one wins :(")
-                                .font(.title.bold())
-                        }
-                        Spacer()
-                    } // hs
-                    .padding(8)
-                    .background(.blue.opacity(0.7))
-                    .cornerRadius(15)
-                    .padding(.bottom, 10)
+                    TurnsView(turn: turn)
                     
-                    if(turn != .user && turn != .computer){ // no one's turn then start next round
+                    if(turn != .user && turn != .computer){ // tie or loose scenario, then start next round
                         HStack{
                             Spacer()
                             Button{
-                                userPieces = 21
-                                computerPieces = 21
-                                hole = Array(repeating: .blank, count: 42)
-                                turn = .user
-                                connectIndex = []
+                                restartGame()
                             }label: {
                                 Text("Start next round")
                                     .bold()
                                     .font(.title)
+                                    .foregroundColor(.white)
                             }
                             Spacer()
                         } // inHS
@@ -129,12 +104,14 @@ struct ContentView: View {
                         .background(.blue.opacity(0.7))
                         .cornerRadius(15)
                     } // restarting if block
+                    
                     Spacer()
+                    
                 } //vs
                 .padding()
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
-                    ToolbarItem(placement: .navigationBarLeading) {
+                    ToolbarItem(placement: .principal) {
                         Text("Connect 4")
                             .bold()
                             .font(.largeTitle)
@@ -143,11 +120,7 @@ struct ContentView: View {
                         HStack{
                             Button{
                                 if(turn != .computer){
-                                    userPieces = 21
-                                    computerPieces = 21
-                                    hole = Array(repeating: .blank, count: 42)
-                                    turn = .user
-                                    connectIndex = []
+                                    restartGame()
                                 }
                             }label: {
                                 Image(systemName: "arrow.counterclockwise.circle")
@@ -168,12 +141,20 @@ struct ContentView: View {
                                     .cornerRadius(15)
                             }
                         } // toolB hs
-                    } // restart
+                    } // restart and settings
                 } // toolB
             } // nav
-            
         } // geo
     } // someV
+    
+    func restartGame(){
+        print("Restarting game...")
+        userPieces = 21
+        computerPieces = 21
+        hole = Array(repeating: .blank, count: 42)
+        turn = .user
+        connectIndex = []
+    }
     
     func playerTurn(index: Int) {
             turn = .computer
@@ -354,7 +335,7 @@ struct ContentView: View {
             }
             computerDrop(col: col, row: blankNum)
         }
-    /// computerTurn()
+    // computerTurn()
     
     // ->
     func computerDrop(col: Int, row: Int) {
@@ -473,7 +454,7 @@ struct ContentView: View {
                 }
             }
         }
-    // <_
+    // <-
     
     
 }
